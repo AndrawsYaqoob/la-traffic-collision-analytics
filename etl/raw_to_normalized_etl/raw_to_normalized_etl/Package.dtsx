@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="35"
-  DTS:VersionGUID="{273D3BDD-7CC5-42D5-9966-7DAF02CFD5A7}">
+  DTS:VersionBuild="39"
+  DTS:VersionGUID="{171F5507-8066-4A1B-88C0-23D4F0CA2E28}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -61,7 +61,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="0"
           DTS:ConnectRetryInterval="0"
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Career Goals\GitHub Projects\la-traffic-collision-analytics\data\sample_collision_dataset.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Career Goals\GitHub Projects\la-traffic-collision-analytics\data\collision_dataset.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -1521,7 +1521,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">Sheet1$</property>
+                  name="OpenRowset">Data$</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -3167,7 +3167,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">Sheet1$</property>
+                  name="OpenRowset">Data$</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -3685,7 +3685,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">Sheet1$</property>
+                  name="OpenRowset">Data$</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -5535,13 +5535,13 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="198.666666666667,42"
-          Id="Package\Load SampleCollision to StgMoRaw\sample_collision_dataset"
-          TopLeft="557.999983370305,79.9999976158143" />
-        <NodeLayout
           Size="137.333333333334,42.6666666666667"
           Id="Package\Load SampleCollision to StgMoRaw\stg_mo_raw"
           TopLeft="590.999982386828,313.999990642071" />
+        <NodeLayout
+          Size="198.666666666667,42"
+          Id="Package\Load SampleCollision to StgMoRaw\sample_collision_dataset"
+          TopLeft="557.999983370305,79.9999976158143" />
         <NodeLayout
           Size="158.666666666667,42.6666666666667"
           Id="Package\Load SampleCollision to StgMoRaw\Data Conversion"
