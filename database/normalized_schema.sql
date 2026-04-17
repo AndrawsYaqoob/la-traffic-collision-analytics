@@ -89,3 +89,18 @@ CREATE TABLE stg_mo_raw(
 	[report_number] [bigint] NOT NULL,
 	[mo_codes_raw] [varchar](1000) NULL
 );
+
+
+-- ============================================================
+-- AUDIT TABLE
+-- ============================================================
+
+CREATE TABLE dbo.etl_audit_log (
+    audit_id        BIGINT          IDENTITY(1,1)   PRIMARY KEY,
+    package_name    VARCHAR(100)    NOT NULL,
+    error_code      INT             NULL,
+    error_message   VARCHAR(MAX)    NULL,
+    time_of_failure DATETIME        DEFAULT GETDATE(),
+    error_location  VARCHAR(100)    NULL,
+    data            VARCHAR(MAX)    NULL
+);
