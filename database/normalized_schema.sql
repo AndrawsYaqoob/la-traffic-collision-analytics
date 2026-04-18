@@ -47,7 +47,7 @@ CREATE TABLE dim_premise (
 
 CREATE TABLE fact_report (
     report_number   BIGINT      PRIMARY KEY,
-    date_reported   DATE        NOT NULL,
+    date_reported   DATE        NULL,
     date_occurred   DATE        NOT NULL,
     time_occurred   TIME        NULL,
     area_id         INT         NOT NULL,

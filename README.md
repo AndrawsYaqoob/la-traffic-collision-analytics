@@ -255,6 +255,8 @@ warehouse/
     star_schema.sql  
 
 etl/  
+    scripts/
+        pre_validation.py
     raw_to_normalized_etl.dtsx
     normalized_to_warehouse_etl.dtsx
 
