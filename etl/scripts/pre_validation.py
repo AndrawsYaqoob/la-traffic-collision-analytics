@@ -47,7 +47,7 @@ REQUIRED_COLUMNS = [
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "../../"))
 DATA_DIR = os.path.join(PROJECT_ROOT, "data")
-SOURCE_FILE = os.path.join(DATA_DIR, "sample_collision_dataset.xlsx")
+SOURCE_FILE = os.path.join(DATA_DIR, "collision_dataset.xlsx")
 CLEAN_OUTPUT = os.path.join(DATA_DIR, "cleaned_dataset.xlsx")
 FAILED_OUTPUT = os.path.join(DATA_DIR, "failed_dataset.xlsx")
 

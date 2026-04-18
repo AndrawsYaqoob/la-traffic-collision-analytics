@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="50"
-  DTS:VersionGUID="{199248B6-A085-494F-B240-A1D381798671}">
+  DTS:VersionBuild="55"
+  DTS:VersionGUID="{13CF7AD2-5522-411B-B136-60C05853211A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1128,6 +1128,96 @@
               </outputs>
             </component>
             <component
+              refId="Package\Load SampleCollision to DimsAreaCrimePremise\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load SampleCollision to DimsAreaCrimePremise\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load SampleCollision to DimsAreaCrimePremise\Conditional Split.Inputs[Conditional Split Input].Columns[Data Conversion.Premise Code]"
+                      cachedDataType="i4"
+                      cachedName="Data Conversion.Premise Code"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Load SampleCollision to DimsAreaCrimePremise\sort Premise.Outputs[Sort Output].Columns[Data Conversion.Premise Code]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load SampleCollision to DimsAreaCrimePremise\Conditional Split.Outputs[Valid Premise Rows]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Valid Premise Rows"
+                  synchronousInputId="Package\Load SampleCollision to DimsAreaCrimePremise\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">![ISNULL](#{Package\Load SampleCollision to DimsAreaCrimePremise\sort Premise.Outputs[Sort Output].Columns[Data Conversion.Premise Code]}) &amp;&amp; [TRIM]((DT_WSTR,50)#{Package\Load SampleCollision to DimsAreaCrimePremise\sort Premise.Outputs[Sort Output].Columns[Data Conversion.Premise Code]}) != ""</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">!ISNULL([Data Conversion.Premise Code]) &amp;&amp; TRIM((DT_WSTR,50)[Data Conversion.Premise Code]) != ""</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load SampleCollision to DimsAreaCrimePremise\Conditional Split.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\Load SampleCollision to DimsAreaCrimePremise\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load SampleCollision to DimsAreaCrimePremise\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Load SampleCollision to DimsAreaCrimePremise\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load SampleCollision to DimsAreaCrimePremise\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load SampleCollision to DimsAreaCrimePremise\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load SampleCollision to DimsAreaCrimePremise\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load SampleCollision to DimsAreaCrimePremise\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\Load SampleCollision to DimsAreaCrimePremise\Data Conversion"
               componentClassID="Microsoft.DataConvert"
               contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -1385,7 +1475,7 @@
                 <property
                   dataType="System.Boolean"
                   description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepNulls">true</property>
+                  name="FastLoadKeepNulls">false</property>
                 <property
                   dataType="System.String"
                   description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
@@ -1514,7 +1604,7 @@
                 <property
                   dataType="System.Boolean"
                   description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepNulls">true</property>
+                  name="FastLoadKeepNulls">false</property>
                 <property
                   dataType="System.String"
                   description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
@@ -1643,7 +1733,7 @@
                 <property
                   dataType="System.Boolean"
                   description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepNulls">true</property>
+                  name="FastLoadKeepNulls">false</property>
                 <property
                   dataType="System.String"
                   description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
@@ -2116,9 +2206,14 @@
               startId="Package\Load SampleCollision to DimsAreaCrimePremise\Sort Crime.Outputs[Sort Output]" />
             <path
               refId="Package\Load SampleCollision to DimsAreaCrimePremise.Paths[Sort Output2]"
-              endId="Package\Load SampleCollision to DimsAreaCrimePremise\dim_premise.Inputs[OLE DB Destination Input]"
+              endId="Package\Load SampleCollision to DimsAreaCrimePremise\Conditional Split.Inputs[Conditional Split Input]"
               name="Sort Output"
               startId="Package\Load SampleCollision to DimsAreaCrimePremise\sort Premise.Outputs[Sort Output]" />
+            <path
+              refId="Package\Load SampleCollision to DimsAreaCrimePremise.Paths[Valid Premise Rows]"
+              endId="Package\Load SampleCollision to DimsAreaCrimePremise\dim_premise.Inputs[OLE DB Destination Input]"
+              name="Valid Premise Rows"
+              startId="Package\Load SampleCollision to DimsAreaCrimePremise\Conditional Split.Outputs[Valid Premise Rows]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -4785,31 +4880,7 @@
         <NodeLayout
           Size="141.333333333334,42.6666666666667"
           Id="Package\Load SampleCollision to DimsAreaCrimePremise\dim_premise"
-          TopLeft="613.999981701375,387.333327909311" />
-        <EdgeLayout
-          Id="Package\Load SampleCollision to DimsAreaCrimePremise.Paths[Sort Output2]"
-          TopLeft="681.833315109214,353.999991178513">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,33.333336730798"
-              Start="0,0"
-              End="0,25.833336730798">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,25.833336730798" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          TopLeft="607.999981880189,474.333325316509" />
         <EdgeLayout
           Id="Package\Load SampleCollision to DimsAreaCrimePremise.Paths[Sort Output1]"
           TopLeft="505.999986857176,352.666657427947">
@@ -4829,9 +4900,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -4853,9 +4922,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -4889,9 +4956,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -4913,9 +4978,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -4949,9 +5012,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -4973,9 +5034,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -4997,8 +5056,56 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="157.333333333334,42.6666666666667"
+          Id="Package\Load SampleCollision to DimsAreaCrimePremise\Conditional Split"
+          TopLeft="598.999982148409,391.666655848424" />
+        <EdgeLayout
+          Id="Package\Load SampleCollision to DimsAreaCrimePremise.Paths[Sort Output2]"
+          TopLeft="678.333315332731,353.999991178513">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.6666646699113"
+              Start="0,0"
+              End="0,30.1666646699113">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.1666646699113" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load SampleCollision to DimsAreaCrimePremise.Paths[Valid Premise Rows]"
+          TopLeft="678.166648680966,434.333322515091">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40.0000028014182"
+              Start="0,0"
+              End="0,32.5000028014182">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5000028014182" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
+              BoundingBox="-43.87076171875,11.3754896819591,87.7415234375,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
